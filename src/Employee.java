@@ -74,9 +74,20 @@ public class Employee {
     }
 
 
+    public int hashCode() {
+        return java.util.Objects.hash(lastName, name, patronymic, department, salary);
+    }
 
 
-
+    @Override
+    public boolean equals(Object other) {
+        if(this.getClass() != other.getClass()) {
+            return false;
+        }
+        Employee firstEmployees = (Employee) other;
+        boolean employeesComparison = ((lastName.equals(firstEmployees.lastName)) && (name.equals(firstEmployees.name)) && (patronymic == firstEmployees.patronymic));
+        return employeesComparison;
+    }
 
 
 

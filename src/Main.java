@@ -15,7 +15,7 @@ public class Main {
         employees[5] = new Employee("Евченко", "Евгений", "Вячеславович", 3, 20_000);
         employees[6] = new Employee("Кестнер", "Алексей", "Васильевич", 4, 25_000);
         employees[7] = new Employee("Бушмакина", "Ирина", "Александровна", 4, 40_000);
-        employees[8] = new Employee("Петров", "Иван", "Петрович", 5, 5_000);
+        employees[8] = new Employee("Иванов", "Иван", "Иванович", 1, 35_000);
         employees[9] = new Employee("Халявин", "Виктор", "Иванович", 5, 1_000);
 
 
@@ -100,6 +100,34 @@ public class Main {
         for (int i = 0; i < employees.length; i++) {
             System.out.println((employees[i].printName()));
 
+        }
+
+//Присваиваем каждому объекту Хэш код
+        System.out.print("\n Метод ХЭШ код: \n");
+        for (int i = 0; i < employees.length; i++) {
+            System.out.print("id-" + (i+1)+" : ");
+            System.out.println(employees[i].hashCode());
+        }
+
+
+  //Сравнение через иквэлс
+        System.out.print("\nCравним сотрудника первого со всеми остальными через метод иквэлс, результат: \n");
+        int index = 0;
+        if (index >= 0 && index <= employees.length) {
+            for (int i = 0; i < employees.length ; i++) {
+                if ((index != i) && (employees[index].equals(employees[i]) == true)) {
+                    System.out.println("\n_____Схожи сотрудники, смотри id: " + (index+1) + " и смотри id: " + (i+1));
+                    System.out.println(employees[index] + "_____\n");
+
+                } else if ((index != i) && (employees[index].equals(employees[i]) == false)){
+                    System.out.print( "Не найдено схожего сотрудника в id: " );
+                    System.out.println((i+1));
+                }
+
+            }
+
+        } else {
+            System.out.println("Ошибка: Индекс не может быть больше чем размер массива, и не может быть меньше 0");
         }
 
 
