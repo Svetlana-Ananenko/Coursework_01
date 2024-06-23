@@ -1,140 +1,45 @@
 import java.util.Arrays;
 
 public class Main {
+    private static final Employee[] employees = new Employee[10];
 
     public static void main(String[] args) {
 
-
-        Employee[] employees = new Employee[10];
         System.out.println("Список всех сотрудников со всеми имеющимися полями: ");
-        employees[0] = new Employee("Иванов", "Иван", "Иванович", 1, 35_000);
-        employees[1] = new Employee("Еремин", "Сергей", "Васильевич", 1, 50_000);
-        employees[2] = new Employee("Кривобоков", "Роман", "Юрьевич", 2, 15_000);
-        employees[3] = new Employee("Шевякова", "Елена", "Андреевна", 2, 10_000);
-        employees[4] = new Employee("Камратов", "Андрей", "Валерьевич", 3, 120_000);
-        employees[5] = new Employee("Евченко", "Евгений", "Вячеславович", 3, 20_000);
-        employees[6] = new Employee("Кестнер", "Алексей", "Васильевич", 4, 25_000);
-        employees[7] = new Employee("Бушмакина", "Ирина", "Александровна", 4, 40_000);
-        employees[8] = new Employee("Иванов", "Иван", "Иванович", 1, 35_000);
-        employees[9] = new Employee("Халявин", "Виктор", "Иванович", 5, 1_000);
-
+        employees[0] = new Employee(1, "Иванов", "Иван", "Иванович", 1, 35_000);
+        employees[1] = new Employee(2, "Еремин", "Сергей", "Васильевич", 1, 50_000);
+        employees[2] = new Employee(3, "Кривобоков", "Роман", "Юрьевич", 2, 15_000);
+        employees[3] = new Employee(4, "Шевякова", "Елена", "Андреевна", 2, 10_000);
+        employees[4] = new Employee(5, "Камратов", "Андрей", "Валерьевич", 3, 120_000);
+        employees[5] = new Employee(6, "Евченко", "Евгений", "Вячеславович", 3, 20_000);
+        employees[6] = new Employee(7, "Кестнер", "Алексей", "Васильевич", 4, 25_000);
+        employees[7] = new Employee(8, "Бушмакина", "Ирина", "Александровна", 4, 40_000);
+        employees[8] = new Employee(9, "Иванова", "Наталья", "Викторовна", 5, 5_000);
+        employees[9] = new Employee(10, "Халявин", "Виктор", "Иванович", 5, 1_000);
 
         //печатаю список всех сотрудников со всеми полями
-        for (int i = 0; i < employees.length; i++) {
-            System.out.print("id-" + (i+1)+" ");
-            System.out.println(employees[i]);
+        Employee.printAll(employees);
 
-        }
+        //печатаю cумму затрат в месяц на ЗП всех сотрудников
+        Employee.summaAllOnMonth(employees);
 
+        //Нахожу самую Максимальную ЗП
+        Employee.maxSummaOnMonthForEmployee(employees);
 
+        //Нахожу самую минимальную ЗП
+        Employee.minSummaOnMonthForEmployee(employees);
 
+        //Нахожу среднюю ЗП
+        Employee.averageSalary(employees);
 
+        //Печатаю ФИО всех сотрудников компании
+        Employee.printName(employees);
 
-        double summ = 0;
-        for (int i = 0; i < employees.length; i++) {
+        //Печатаем для каждого объекта Хэш код
+        Employee.checkHash(employees);
 
-            if ( employees[i].salary() > 0 ) {
-                summ = summ + employees[i].salary();
-            }
-        }
-        System.out.println(  "\nСумма затрат на ЗП всех сотрудников в месяц составляет: " + summ);
-
-        System.out.println("_______________________");
-
-//Нахожу самую Максимальную ЗП
-
-        double summ2 = 0;
-        for (int i = 0; i < employees.length; i++) {
-
-            if ( employees[i].salary() > summ2 ) {
-                summ2 = employees[i].salary();
-            }
-
-        }
-        System.out.println(  "\n Максимальная зарплата сотрудника составляет: " + summ2);
-
-        for (int i = 0; i < employees.length; i++) {
-
-            if ( employees[i].salary() == summ2 ) {
-                System.out.print("В нашей компании, сотрудник с самой большой ЗП, является: " );
-                System.out.println((employees[i]));
-
-            }
-        }
-
-
-        System.out.println("_______________________");
-
-
-//Нахожу самую низкую ЗП
-        for (int i = 0; i < employees.length; i++) {
-
-            if ( employees[i].salary() < summ2 ) {
-                summ2 = employees[i].salary();
-            }
-        }
-        System.out.println(  "\n Минимальная зарплата сотрудника составляет: " + summ2);
-
-
-        for (int i = 0; i < employees.length; i++) {
-            if ( employees[i].salary() == summ2 ) {
-                System.out.print("В нашей компании, сотрудник с самой низкой ЗП, является: " );
-                System.out.println((employees[i]));
-
-            }
-        }
-
-        System.out.println("_______________________");
-
-
-//Нахожу среднюю ЗП
-        summ =  summ / (employees.length);
-        System.out.println("\nСредняя значение зарплат составляет: " + summ + "\n");
-
-
-        System.out.println("_______________________");
-
-
-//Печатаю ФИО всех сотрудников компании
-        System.out.println("Список всех сотрудников компании: ");
-        for (int i = 0; i < employees.length; i++) {
-            System.out.println((employees[i].printName()));
-
-        }
-
-//Присваиваем каждому объекту Хэш код
-        System.out.print("\n Метод ХЭШ код: \n");
-        for (int i = 0; i < employees.length; i++) {
-            System.out.print("id-" + (i+1)+" : ");
-            System.out.println(employees[i].hashCode());
-        }
-
-
-  //Сравнение через иквэлс
-        System.out.print("\nCравним сотрудника первого со всеми остальными через метод иквэлс, результат: \n");
-        int index = 0;
-        if (index >= 0 && index <= employees.length) {
-            for (int i = 0; i < employees.length ; i++) {
-                if ((index != i) && (employees[index].equals(employees[i]) == true)) {
-                    System.out.println("\n_____Схожи сотрудники, смотри id: " + (index+1) + " и смотри id: " + (i+1));
-                    System.out.println(employees[index] + "_____\n");
-
-                } else if ((index != i) && (employees[index].equals(employees[i]) == false)){
-                    System.out.print( "Не найдено схожего сотрудника в id: " );
-                    System.out.println((i+1));
-                }
-
-            }
-
-        } else {
-            System.out.println("Ошибка: Индекс не может быть больше чем размер массива, и не может быть меньше 0");
-        }
-
-
-
+        //Сравнение через иквэлс
+        Employee.equalsEmployee(employees);
 
     }
-
-
-
 }
